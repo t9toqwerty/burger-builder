@@ -4,7 +4,6 @@ import BurgerIngrediants from "./BurgerIngrediants/BuegerIngrediants";
 
 export default class Burger extends Component {
   render() {
-    //TODO Analyse this part of code - 8 to 14
     let transformedIngrediants = Object.keys(this.props.ingrediants)
       .map(igKey => {
         return [...Array(this.props.ingrediants[igKey])].map((_, i) => {

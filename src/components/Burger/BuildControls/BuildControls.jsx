@@ -27,15 +27,25 @@ export default class BuildControls extends Component {
   render() {
     return (
       <div className={classes.BuildControls}>
+        <p>
+          Current Price: <strong>{this.props.currentPrice.toFixed(2)}</strong>
+        </p>
         {this.controls.map(control => (
           <BuildControl
             type={control.type}
             key={control.label}
             label={control.label}
-            added={() => this.props.ingrediantsAdded()}
-            removed={() => this.props.ingrediantsRemoved()}
+            added={() => this.props.ingrediantsAdded(control.type)}
+            removed={() => this.props.ingrediantsRemoved(control.type)}
+            disabled={this.props.disabledInfo[control.type]}
           />
         ))}
+        <button
+          disabled={!this.props.purchasable}
+          className={classes.OrderButton}
+        >
+          ORDER NOW
+        </button>
       </div>
     );
   }
