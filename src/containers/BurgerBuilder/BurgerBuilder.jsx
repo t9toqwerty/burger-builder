@@ -3,6 +3,7 @@ import Aux from "./../../hoc/Aux";
 import Burger from "./../../components/Burger/Burger";
 import BurgerControls from "./../../components/Burger/BuildControls/BuildControls";
 import Modal from "./../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 const INGREDIANTS_PRICE = {
   salad: 0.5,
@@ -22,12 +23,33 @@ export default class BurgerBuilder extends Component {
         meat: 0
       },
       totalPrice: 4,
-      purchasable: false
+      purchasable: false,
+      purchasing: false
     };
 
     this.addIndrediantsHandler = this.addIndrediantsHandler.bind(this);
     this.removeIndrediantsHandler = this.removeIndrediantsHandler.bind(this);
+    this.updatePurchaseState = this.updatePurchaseState.bind(this);
+    this.purchaseHandler = this.purchaseHandler.bind(this);
+    this.purchaseCalcelHandler = this.purchaseCalcelHandler.bind(this);
   }
+
+  purchaseHandler() {
+    this.setState({
+      purchasing: true
+    });
+  }
+
+  purchaseCalcelHandler() {
+    this.setState({
+      purchasing: false
+    });
+  }
+
+  purchaseContinueHandler() {
+    alert("You continue!");
+  }
+
   updatePurchaseState(ingrediants) {
     let allIngrediantCount = Object.keys(ingrediants)
       .map(ingrediant => ingrediants[ingrediant])
@@ -80,9 +102,20 @@ export default class BurgerBuilder extends Component {
 
     return (
       <Aux>
-        <Modal />
+        <Modal
+          show={this.state.purchasing}
+          modalClosed={this.purchaseCalcelHandler}
+        >
+          <OrderSummary
+            price={this.state.totalPrice}
+            purchaseCancelled={this.purchaseCalcelHandler}
+            purchaseContinued={this.purchaseContinueHandler}
+            ingrediants={this.state.ingrediants}
+          />
+        </Modal>
         <Burger ingrediants={this.state.ingrediants} />
         <BurgerControls
+          ordered={this.purchaseHandler}
           disabledInfo={disabledInfo}
           currentPrice={this.state.totalPrice}
           ingrediantsAdded={this.addIndrediantsHandler}

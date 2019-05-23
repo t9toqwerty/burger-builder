@@ -43,6 +43,7 @@ export default class BuildControls extends Component {
         <button
           disabled={!this.props.purchasable}
           className={classes.OrderButton}
+          onClick={this.props.ordered}
         >
           ORDER NOW
         </button>
