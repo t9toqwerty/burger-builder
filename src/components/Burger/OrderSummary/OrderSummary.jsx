@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Button from "./../../UI/Button/Button";
 
 export default class OrderSummary extends Component {
+  componentDidUpdate() {
+    console.log("OrderSummary Component Did Update");
+  }
+
   render() {
     const ingrediantSummary = Object.keys(this.props.ingrediants).map(igkey => {
       return (
