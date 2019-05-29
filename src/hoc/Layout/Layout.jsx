@@ -8,7 +8,7 @@ class Layout extends Component {
   constructor() {
     super();
     this.state = {
-      showSideDrawer: true
+      showSideDrawer: false
     };
     this.sideDrawerClosedHandler = this.sideDrawerClosedHandler.bind(this);
     this.sideDrawerToggleHandler = this.sideDrawerToggleHandler.bind(this);
